@@ -1,9 +1,9 @@
 /**
  * Imports / used to create variable lists
  */
-
 import java.util.Scanner;
-import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
 public class DoorOpeningSimulator
 {
     Scanner s = new Scanner(System.in);
@@ -13,13 +13,9 @@ public class DoorOpeningSimulator
     private boolean run = true;
     private boolean isDoorOpened = false;
     private int reputation = 0;
-    private String purple = "\u001B[35m";
-    private String white = "\u001B[37m";
-    private String introLine1 = "You open the door to find a person by the name of, ";
-    private String introLine2 = ", do you wish to let them in?";
-    private String openedLine1 = "You have gave, ";
-    private String openedLine2 = ", access to pookie.\n";
-    private String[] doorAnimations = new String[] {
+    private final String purple = "\u001B[35m";
+    private final String white = "\u001B[37m";
+    private final String[] doorAnimations = new String[] {
             "",
             "",
             "",
@@ -28,56 +24,56 @@ public class DoorOpeningSimulator
             "",
             "",
             ""};
-    private String[] names = new String[] {
-    "Shakib Amin",
-    "Naya Antaki",
-    "Haroon Awan",
-    "Leandra Boodram",
-    "Rafael Bui",
-    "Ryan Chen",
-    "Tian Ying Chen",
-    "Xin Chen",
-    "Akzel Davila",
-    "Farian Faruqee",
-    "Ricky Jiang",
-    "Veronica Joseph",
-    "Stanley Lee",
-    "Sharon Lin",
-    "Nikita Manannikov",
-    "Fiona Meyerhoff",
-    "Adib Miah",
-    "Enamul Muttakin",
-    "Jack Ni",
-    "Nafisa Patwary",
-    "Irsal Siam",
-    "Siyam Siddique",
-    "Artyom Simonyan",
-    "Dariusz Smola",
-    "Rahman Tanjid",
-    "Jason Teo",
-    "Benjamin Tso",
-    "Christian Wan",
-    "Yanbo Wang",
-    "Noelle Wu",
-    "Brandon Yeung",
-    "Tracy Zhou",
-    "Mr. Das",
+    private final String[] names = new String[] {
+        "Shakib Amin",
+        "Naya Antaki",
+        "Haroon Awan",
+        "Leandra Boodram",
+        "Rafael Bui",
+        "Ryan Chen",
+        "Tian Ying Chen",
+        "Xin Chen",
+        "Akzel Davila",
+        "Farian Faruqee",
+        "Ricky Jiang",
+        "Veronica Joseph",
+        "Stanley Lee",
+        "Sharon Lin",
+        "Nikita Manannikov",
+        "Fiona Meyerhoff",
+        "Adib Miah",
+        "Enamul Muttakin",
+        "Jack Ni",
+        "Nafisa Patwary",
+        "Irsal Siam",
+        "Siyam Siddique",
+        "Artyom Simonyan",
+        "Dariusz Smola",
+        "Rahman Tanjid",
+        "Jason Teo",
+        "Benjamin Tso",
+        "Christian Wan",
+        "Yanbo Wang",
+        "Noelle Wu",
+        "Brandon Yeung",
+        "Tracy Zhou",
+        "Mr. Das",
     };
-    private String[] badOutcome = new String[]{
-    ", commits grand theft auto.",
-    ", commits fraud.",
-    ", stole some old lady's purse.",
-    ", turned off the ethernet.",
-    ", drove under the influence.",
-    ", vandalised their colleague's car.",
+    private final String[] badOutcome = new String[]{
+        ", commits grand theft auto.",
+        ", commits fraud.",
+        ", stole some old lady's purse.",
+        ", turned off the ethernet.",
+        ", drove under the influence.",
+        ", vandalised their colleague's car.",
     };
-    private String[] goodOutcome = new String[]{
-    ", gave the homeless money.",
-    ", volunteered at a homeless shelter.",
-    ", adopted a puppy.",
-    ", finished their project.",
-    ", gave somebody a car.",
-    ", saved someone.",
+    private final String[] goodOutcome = new String[]{
+        ", gave the homeless money.",
+        ", volunteered at a homeless shelter.",
+        ", adopted a puppy.",
+        ", finished their project.",
+        ", gave somebody a car.",
+        ", saved someone.",
     };
     /**
      * Constructor
@@ -107,10 +103,22 @@ public class DoorOpeningSimulator
 
         return "Door Closes ( ANIMATION WIP )";
     }
+    public static void wait(int ms)
+    {
+        try
+        {
+            Thread.sleep(ms);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
+    }
 
     public void mainLoop(){
         String choice = "";
         while (run){
+            wait(2000);
             if (isDoorOpened){
                 System.out.println(closeDoor());
                 isDoorOpened = false;
@@ -130,16 +138,39 @@ public class DoorOpeningSimulator
             if (choice.equals("0")){
                 System.out.print(purple + "You resigned...");
                 if (reputation >= 5){
-                    System.out.print(purple + "Wow! Why did you resign? You're built for this job!");
+                    System.out.println(purple + "\nWow! Why did you resign? You're built for this job! Take this trophy as compensation <3\n\n" +
+                            "              .-=========-.\n" +
+                            "              \\'-=======-'/\n" +
+                            "              _|   .=.   |_\n" +
+                            "             ((|  {{1}}  |))\n" +
+                            "              \\|   /|\\   |/\n" +
+                            "               \\__ '`' __/\n" +
+                            "                 _`) (`_\n" +
+                            "               _/_______\\_\n" +
+                            "              /___________\\                                                                                                                                                             jgs\n");
                 }
                 if (reputation <= -5){
-                    System.out.print(purple + "Thank god you resigned. This profession is not for you.");
+                    System.out.println(purple + "Thank god you resigned. This profession is not for you. This dog forever poop on your face.\n\n" +
+                            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣤⡀⠀⠀⠀⠀⠀⠀\n" +
+                            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣤⣤⣄⠀⠀⠀\n" +
+                            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣷⣶⣶\n" +
+                            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣴⣶⣶⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟\n" +
+                            "⠀⠀⠀⠀⣀⠀⠀⠀⣠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠛⠛⠁⠀\n" +
+                            "⠀⠀⠀⢰⣿⣷⣦⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠁⠀⠀⠀⠀⠀\n" +
+                            "⠀⠀⠀⠀⠉⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠋⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⣿⣿⡇⠀⠀⢿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "⠀⠀⢀⡄⠀⠀⠀⠀⠈⠻⣿⣿⣿⠇⠀⠀⢸⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "⠀⣀⢼⣿⣦⡄⠀⠀⠀⢰⣿⣿⠏⠀⠀⠀⠈⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "⠼⠿⠿⠿⠿⠿⠆⠀⠀⠿⠿⠏⠀⠀⠀⠀⠀⠹⠿⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
                 }
                 run = false;
             }
             if (choice.equals("1")){
                 System.out.println(openDoor());
                 isDoorOpened = true;
+                System.out.println("You have gave, " + names[nameNumber] + ", access to pookie.");
                 if (decision > .50){
                     System.out.println(names[nameNumber] + goodOutcome[outcomeNumber]);
                     reputation++;

@@ -8,7 +8,7 @@ public class DoorOpeningRunner {
         System.out.print(white + "Door Opening Simulator ( BETA )"
         + white + "\nHere lies a door that invites its visitors to the land of " + purple + "pookie."
         + white + "\nYou are the " + purple + "gatekeeper of this door."
-        + white + "\nPress " + purple + "-1 to start: ");
+        + purple + "\n-1 " + white + "to start: ");
         String input = s.nextLine();
         if (input.equals("-1")){
             DOS.mainLoop();

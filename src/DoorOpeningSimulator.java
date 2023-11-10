@@ -25,55 +25,60 @@ public class DoorOpeningSimulator
             "",
             ""};
     private final String[] names = new String[] {
-        "Shakib Amin",
-        "Naya Antaki",
-        "Haroon Awan",
-        "Leandra Boodram",
-        "Rafael Bui",
-        "Ryan Chen",
-        "Tian Ying Chen",
-        "Xin Chen",
-        "Akzel Davila",
-        "Farian Faruqee",
-        "Ricky Jiang",
-        "Veronica Joseph",
-        "Stanley Lee",
-        "Sharon Lin",
-        "Nikita Manannikov",
-        "Fiona Meyerhoff",
-        "Adib Miah",
-        "Enamul Muttakin",
-        "Jack Ni",
-        "Nafisa Patwary",
-        "Irsal Siam",
-        "Siyam Siddique",
-        "Artyom Simonyan",
-        "Dariusz Smola",
-        "Rahman Tanjid",
-        "Jason Teo",
-        "Benjamin Tso",
-        "Christian Wan",
-        "Yanbo Wang",
-        "Noelle Wu",
-        "Brandon Yeung",
-        "Tracy Zhou",
-        "Mr. Das",
+            "Shakib Amin",
+            "Naya Antaki",
+            "Haroon Awan",
+            "Leandra Boodram",
+            "Rafael Bui",
+            "Ryan Chen",
+            "Tian Ying Chen",
+            "Xin Chen",
+            "Akzel Davila",
+            "Farian Faruqee",
+            "Ricky Jiang",
+            "Veronica Joseph",
+            "Stanley Lee",
+            "Sharon Lin",
+            "Nikita Manannikov",
+            "Fiona Meyerhoff",
+            "Adib Miah",
+            "Enamul Muttakin",
+            "Jack Ni",
+            "Nafisa Patwary",
+            "Irsal Siam",
+            "Siyam Siddique",
+            "Artyom Simonyan",
+            "Dariusz Smola",
+            "Rahman Tanjid",
+            "Jason Teo",
+            "Benjamin Tso",
+            "Christian Wan",
+            "Yanbo Wang",
+            "Noelle Wu",
+            "Brandon Yeung",
+            "Tracy Zhou",
+            "Mr. Das",
     };
     private final String[] badOutcome = new String[]{
-        ", commits grand theft auto.",
-        ", commits fraud.",
-        ", stole some old lady's purse.",
-        ", turned off the ethernet.",
-        ", drove under the influence.",
-        ", vandalised their colleague's car.",
+            ", commits grand theft auto.",
+            ", commits fraud.",
+            ", stole some old lady's purse.",
+            ", turned off the ethernet.",
+            ", drove under the influence.",
+            ", vandalised their colleague's car.",
+            ", clogged the toilet.",
+
     };
     private final String[] goodOutcome = new String[]{
-        ", gave the homeless money.",
-        ", volunteered at a homeless shelter.",
-        ", adopted a puppy.",
-        ", finished their project.",
-        ", gave somebody a car.",
-        ", saved someone.",
+            ", gave the homeless money.",
+            ", volunteered at a homeless shelter.",
+            ", adopted a puppy.",
+            ", finished their project.",
+            ", gave somebody a car.",
+            ", saved someone.",
+            ", did your math homework.",
+            ", donated money to orphans.",
+
     };
     /**
      * Constructor
@@ -90,7 +95,12 @@ public class DoorOpeningSimulator
         return random_number;
     }
 
-    public int outcomeRandomizer(){
+    public int badOutcomeRandomizer(){
+        int random_number = (int)(Math.random() * badOutcome.length);
+        return random_number;
+    }
+
+    public int goodOutcomeRandomizer(){
         int random_number = (int)(Math.random() * goodOutcome.length);
         return random_number;
     }
@@ -118,13 +128,15 @@ public class DoorOpeningSimulator
     public void mainLoop(){
         String choice = "";
         while (run){
-            wait(2000);
+//            wait(2000);
             if (isDoorOpened){
                 System.out.println(closeDoor());
                 isDoorOpened = false;
             }
             int nameNumber = nameRandomizer();
-            int outcomeNumber = outcomeRandomizer();
+            int goodOutcomeNumber = goodOutcomeRandomizer();
+            int badOutcomeNumber = badOutcomeRandomizer();
+
             double decision = Math.random();
             System.out.print("Your current reputation: " + reputation);
             System.out.print("\nYou open the door to find a person by the name of, " + names[nameNumber] + ", do you wish to let them in?");
@@ -172,20 +184,20 @@ public class DoorOpeningSimulator
                 isDoorOpened = true;
                 System.out.println("You have gave, " + names[nameNumber] + ", access to pookie.");
                 if (decision > .50){
-                    System.out.println(names[nameNumber] + goodOutcome[outcomeNumber]);
+                    System.out.println(names[nameNumber] + goodOutcome[goodOutcomeNumber]);
                     reputation++;
                 }
                 else{
-                    System.out.println(names[nameNumber] + badOutcome[outcomeNumber]);
+                    System.out.println(names[nameNumber] + badOutcome[badOutcomeNumber]);
                     reputation--;
                 }
             }
             if (choice.equals("2")){
                 if (decision > .50){
-                    System.out.println("Avoided: " + names[nameNumber] + goodOutcome[outcomeNumber]);
+                    System.out.println("Avoided: " + names[nameNumber] + goodOutcome[goodOutcomeNumber]);
                 }
                 else{
-                    System.out.println("Avoided: " + names[nameNumber] + badOutcome[outcomeNumber]);
+                    System.out.println("Avoided: " + names[nameNumber] + badOutcome[badOutcomeNumber]);
                 }
             }
         }

@@ -10,12 +10,12 @@ public class DoorOpeningSimulator
     /**
      * Instance variables
      */
-    private boolean run = true;
-    private boolean isDoorOpened = false;
-    private int reputation = 0;
-    private final String purple = "\u001B[35m";
-    private final String white = "\u001B[37m";
-    private final String[] doorAnimations = new String[] {
+    public boolean run = true;
+    public boolean isDoorOpened = false;
+    public int reputation = 0;
+    public final String purple = "\u001B[35m";
+    public final String white = "\u001B[37m";
+    public final String[] doorAnimations = new String[] {
             "",
             "",
             "",
@@ -24,7 +24,7 @@ public class DoorOpeningSimulator
             "",
             "",
             ""};
-    private final String[] names = new String[] {
+    public final String[] names = new String[] {
             "Shakib Amin",
             "Naya Antaki",
             "Haroon Awan",
@@ -59,7 +59,7 @@ public class DoorOpeningSimulator
             "Tracy Zhou",
             "Mr. Das",
     };
-    private final String[] badOutcome = new String[]{
+    public final String[] badOutcome = new String[]{
             ", commits grand theft auto.",
             ", commits fraud.",
             ", stole some old lady's purse.",
@@ -69,7 +69,7 @@ public class DoorOpeningSimulator
             ", clogged the toilet.",
 
     };
-    private final String[] goodOutcome = new String[]{
+    public final String[] goodOutcome = new String[]{
             ", gave the homeless money.",
             ", volunteered at a homeless shelter.",
             ", adopted a puppy.",
@@ -122,84 +122,6 @@ public class DoorOpeningSimulator
         catch(InterruptedException ex)
         {
             Thread.currentThread().interrupt();
-        }
-    }
-
-    public void mainLoop(){
-        String choice = "";
-        while (run){
-//            wait(2000);
-            if (isDoorOpened){
-                System.out.println(closeDoor());
-                isDoorOpened = false;
-            }
-            int nameNumber = nameRandomizer();
-            int goodOutcomeNumber = goodOutcomeRandomizer();
-            int badOutcomeNumber = badOutcomeRandomizer();
-
-            double decision = Math.random();
-            System.out.print("Your current reputation: " + reputation);
-            System.out.print("\nYou open the door to find a person by the name of, " + names[nameNumber] + ", do you wish to let them in?");
-            System.out.print(white +"\nYour Choices:" +
-                    purple + "\n0." + white + " Exit game" +
-                    purple + "\n1:" + white + " Open the Door" +
-                    purple + "\n2:" + white + " Do not Open the Door" +
-                    purple + "\n: ");
-            choice = s.nextLine();
-
-            if (choice.equals("0")){
-                System.out.print(purple + "You resigned...");
-                if (reputation >= 5){
-                    System.out.println(purple + "\nWow! Why did you resign? You're built for this job! Take this trophy as compensation <3\n\n" +
-                            "              .-=========-.\n" +
-                            "              \\'-=======-'/\n" +
-                            "              _|   .=.   |_\n" +
-                            "             ((|  {{1}}  |))\n" +
-                            "              \\|   /|\\   |/\n" +
-                            "               \\__ '`' __/\n" +
-                            "                 _`) (`_\n" +
-                            "               _/_______\\_\n" +
-                            "              /___________\\                                                                                                                                                             jgs\n");
-                }
-                if (reputation <= -5){
-                    System.out.println(purple + "Thank god you resigned. This profession is not for you. This dog forever poop on your face.\n\n" +
-                            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣤⡀⠀⠀⠀⠀⠀⠀\n" +
-                            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣤⣤⣄⠀⠀⠀\n" +
-                            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣷⣶⣶\n" +
-                            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣴⣶⣶⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟\n" +
-                            "⠀⠀⠀⠀⣀⠀⠀⠀⣠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠛⠛⠁⠀\n" +
-                            "⠀⠀⠀⢰⣿⣷⣦⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠁⠀⠀⠀⠀⠀\n" +
-                            "⠀⠀⠀⠀⠉⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⠀⠀⠀\n" +
-                            "⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠋⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                            "⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                            "⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⣿⣿⡇⠀⠀⢿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                            "⠀⠀⢀⡄⠀⠀⠀⠀⠈⠻⣿⣿⣿⠇⠀⠀⢸⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                            "⠀⣀⢼⣿⣦⡄⠀⠀⠀⢰⣿⣿⠏⠀⠀⠀⠈⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                            "⠼⠿⠿⠿⠿⠿⠆⠀⠀⠿⠿⠏⠀⠀⠀⠀⠀⠹⠿⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
-                }
-                run = false;
-            }
-            if (choice.equals("1")){
-                System.out.println(openDoor());
-                isDoorOpened = true;
-                System.out.println("You have gave, " + names[nameNumber] + ", access to pookie.");
-                if (decision > .50){
-                    System.out.println(names[nameNumber] + goodOutcome[goodOutcomeNumber]);
-                    reputation++;
-                }
-                else{
-                    System.out.println(names[nameNumber] + badOutcome[badOutcomeNumber]);
-                    reputation--;
-                }
-            }
-            if (choice.equals("2")){
-                if (decision > .50){
-                    System.out.println("Avoided: " + names[nameNumber] + goodOutcome[goodOutcomeNumber]);
-                }
-                else{
-                    System.out.println("Avoided: " + names[nameNumber] + badOutcome[badOutcomeNumber]);
-                }
-            }
         }
     }
 }

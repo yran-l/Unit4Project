@@ -1,7 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Animation extends JFrame {
     /**
@@ -21,17 +18,11 @@ public class Animation extends JFrame {
         gifLabel = new JLabel();
         updateGif(); // Initialize the label with the first GIF
         add(gifLabel);
-
-        JButton changeGifButton = new JButton("Change GIF");
-        changeGifButton.addActionListener(e -> {
-            // Change the GIF when the button is clicked
             currentGifIndex++;
             if (currentGifIndex > 3) {
                 currentGifIndex = 0; // Reset to the first GIF
-            }
             updateGif(); // Update the label with the new GIF
-        });
-        add(changeGifButton, BorderLayout.SOUTH);
+        };
     }
 
     public void updateGif() {

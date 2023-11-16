@@ -15,7 +15,10 @@ public class DoorOpeningRunner {
         if (input.equals("-1")){
             String choice;
             while (dos.run){
-//                DoorOpeningSimulator.wait(2000);
+                if (dos.isDoorOpened){
+                    door.updateGif();
+                }
+                DoorOpeningSimulator.wait(3000);
                 int nameNumber = dos.nameRandomizer();
                 int goodOutcomeNumber = dos.goodOutcomeRandomizer();
                 int badOutcomeNumber = dos.badOutcomeRandomizer();
@@ -64,7 +67,10 @@ public class DoorOpeningRunner {
                 }
                 if (choice.equals("1")){
                     door.updateGif();
+                    DoorOpeningSimulator.wait(3000);
                     System.out.println("You have gave, " + dos.names[nameNumber] + ", access to pookie.");
+                    door.updateGif();
+                    dos.isDoorOpened = true;
                     if (decision > .50){
                         System.out.println(dos.names[nameNumber] + dos.goodOutcome[goodOutcomeNumber]);
                         dos.reputation++;

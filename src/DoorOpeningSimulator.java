@@ -9,7 +9,7 @@ public class DoorOpeningSimulator {
      * Instance variables
      */
     public boolean run = true;
-    private boolean isDoorOpened = false;
+    public boolean isDoorOpened = false;
     public int reputation = 0;
     public final String purple = "\u001B[35m";
     public final String white = "\u001B[37m";

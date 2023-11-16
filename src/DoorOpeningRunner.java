@@ -1,6 +1,8 @@
 import java.util.Scanner;
 public class DoorOpeningRunner {
     public static void main(String[] args) {
+        Animation door = new Animation();
+        door.setVisible(true);
         Scanner s = new Scanner(System.in);
         DoorOpeningSimulator dos = new DoorOpeningSimulator();
         String purple = "\u001B[35m";
@@ -13,28 +15,24 @@ public class DoorOpeningRunner {
         if (input.equals("-1")){
             String choice;
             while (dos.run){
-                DoorOpeningSimulator.wait(2000);
-                if (dos.isDoorOpened){
-                    System.out.println(dos.closeDoor());
-                    dos.isDoorOpened = false;
-                }
+//                DoorOpeningSimulator.wait(2000);
                 int nameNumber = dos.nameRandomizer();
                 int goodOutcomeNumber = dos.goodOutcomeRandomizer();
                 int badOutcomeNumber = dos.badOutcomeRandomizer();
 
                 double decision = Math.random();
-                System.out.print("Your current reputation: " + dos.reputation);
-                System.out.print("\nYou open the door to find a person by the name of, " + dos.names[nameNumber] + ", do you wish to let them in?");
-                System.out.print(white +"\nYour Choices:" +
-                        purple + "\n0." + "\033[0;94m" + " Exit game" +
-                        purple + "\n1:" + "\033[0;94m" + " Open the Door" +
-                        purple + "\n2:" + "\033[0;94m" + " Do not Open the Door" +
+                System.out.println(purple + "\n\nYour current reputation: " + dos.reputation);
+                System.out.print(purple + dos.putNameIntoEntrance(dos.names[nameNumber]) + "\nWill you let them in?");
+                System.out.print(dos.white +"\nYour Choices:" +
+                        purple + "\n0." + dos.white + " Exit game" +
+                        purple + "\n1:" + dos.white + " Open the Door" +
+                        purple + "\n2:" + dos.white + " Do not Open the Door" +
                         purple + "\n: ");
                 choice = s.nextLine();
 
                 if (choice.equals("0")){
                     System.out.print(purple + "You resigned...");
-                    if (dos.reputation >= 5){
+                    if (dos.reputation >= 3){
                         System.out.println(purple + "\nWow! Why did you resign? You're built for this job! Take this trophy as compensation <3\n\n" +
                                 "              .-=========-.\n" +
                                 "              \\'-=======-'/\n" +
@@ -46,7 +44,7 @@ public class DoorOpeningRunner {
                                 "               _/_______\\_\n" +
                                 "              /___________\\                                                                                                                                                             jgs\n");
                     }
-                    if (dos.reputation <= -5){
+                    if (dos.reputation <= -3){
                         System.out.println(purple + "Thank god you resigned. This profession is not for you. This dog forever poop on your face.\n\n" +
                                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣤⡀⠀⠀⠀⠀⠀⠀\n" +
                                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣤⣤⣄⠀⠀⠀\n" +
@@ -65,8 +63,7 @@ public class DoorOpeningRunner {
                     dos.run = false;
                 }
                 if (choice.equals("1")){
-                    System.out.println(dos.openDoor());
-                    dos.isDoorOpened = true;
+                    door.updateGif();
                     System.out.println("You have gave, " + dos.names[nameNumber] + ", access to pookie.");
                     if (decision > .50){
                         System.out.println(dos.names[nameNumber] + dos.goodOutcome[goodOutcomeNumber]);
